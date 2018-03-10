@@ -15,7 +15,17 @@ function shuffle() {
   shuffle();
 
 
+//Defining function in order to show the cards
+  function showIcons(card) {
+    card.classList.add("show");
+  }
 
+  cards.forEach(function(card) {
+    card.addEventListener("click", function() {
+      //Invoke showIcons when users click on each Cards
+      showIcons(this);
+    });
+  });
 
 
 
