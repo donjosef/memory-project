@@ -72,9 +72,50 @@ h1 {
 .deck .card.match {
     cursor: default;
     background: #02ccba;
+    animation: pulse 0.62s;
+    transform: scale(1);
 }
 .deck .card.dontMatch {
   background-color: #ed6234;
+  animation: shake 0.82s;
+  transform: translateX(0);
+}
+
+/*ANIMATIONS*/
+@keyframes pulse {
+    20% {
+    transform: scale(1.1);
+  }
+
+  40% {
+    transform: scale(1);
+  }
+
+  60% {
+    transform: scale(1.1);
+  }
+
+  80% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translateX(-2px);
+  }
+
+  20%, 80% {
+    transform: translateX(2px);
+  }
+
+  30%, 50%, 70% {
+    transform: translateX(-2px);
+  }
+
+  40%, 60% {
+    transform: translateX(2px);
+  }
 }
 
 /*
