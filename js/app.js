@@ -1,5 +1,6 @@
 const cards = document.querySelectorAll(".card");
 const icons = document.querySelectorAll(".deck .fa");
+let openCards = [];
 
 
 function shuffle() {
@@ -20,6 +21,23 @@ function shuffle() {
     card.classList.add("show");
   }
 
+//Defining a function to check if two cards are equal
+  function checkMatching(card) {
+  openCards.push(card);
+
+  if(openCards.length == 2) {
+    if(openCards[0].firstElementChild.className !== openCards[1].firstElementChild.className) {
+      for(let i = 0; i < openCards.length; i++) {
+        openCards[i].classList.add("dontMatch");
+      }
+      //call hideIcons if dont match
+      setTimeout(hideIcons, 900);
+    } else {
+      //call match if they do match
+      match();
+    }
+  }
+}
   cards.forEach(function(card) {
     card.addEventListener("click", function() {
       //Invoke showIcons when users click on each Cards
