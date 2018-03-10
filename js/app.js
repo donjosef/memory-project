@@ -60,6 +60,7 @@ function shuffle() {
     card.addEventListener("click", function() {
       //Invoke showIcons when users click on each Cards
       showIcons(this);
+      checkMatching(this);
     });
   });
 
