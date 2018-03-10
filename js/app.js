@@ -21,6 +21,23 @@ function shuffle() {
     card.classList.add("show");
   }
 
+//Defining a function to hide the cards when they dont match
+  function hideIcons() {
+    for(let i = 0; i < openCards.length; i++) {
+      openCards[i].classList.remove("show");
+      openCards[i].classList.remove("dontMatch");
+    }
+      openCards = [];
+  }
+
+//Defining a function to keep showing the cards if they match
+  function match() {
+    for(let i = 0; i < openCards.length; i++) {
+      openCards[i].classList.add("match");
+    }
+    openCards = [];
+  }
+
 //Defining a function to check if two cards are equal
   function checkMatching(card) {
   openCards.push(card);
@@ -30,11 +47,12 @@ function shuffle() {
       for(let i = 0; i < openCards.length; i++) {
         openCards[i].classList.add("dontMatch");
       }
-      //call hideIcons if dont match
+      //call hideIcons if they dont match
       setTimeout(hideIcons, 900);
     } else {
       //call match if they do match
       match();
+
     }
   }
 }
