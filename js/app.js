@@ -1,7 +1,10 @@
 const cards = document.querySelectorAll(".card");
 const icons = document.querySelectorAll(".deck .fa");
+const stars = document.querySelectorAll(".stars li i");
+const moves = document.querySelector(".moves");
 const theTimer = document.querySelector(".timer");
 const grid = document.querySelector(".deck");
+let counter = 0;
 let openCards = [];
 let timer = [0, 0, 0];
 let timerRunning = false;
@@ -38,9 +41,29 @@ function start(e) {
      }
 }
 
+
+/*
+-----------------
+MOVES SECTION
+----------------*/
+function incrementMoves() {
+      counter++;
+      if(counter == 1) {
+          moves.textContent = counter + " Move";
+      } else {
+          moves.textContent = counter + " Moves";
+      }
+
+      if(counter >= 16 && counter <= 23) {
+          stars[2].style.color = "#000";
+      } else if (counter >= 24) {
+          stars[1].style.color = "#000";
+      }
+  }
+
 /*
 -------------------------------
-MAIN FUNCTIONALITY OF THE GAME
+MAIN FUNCTIONALITY SECTION
 -----------------------------*/
 function shuffle() {
   let random = Math.floor(Math.random() * cards.length);
@@ -71,11 +94,14 @@ function shuffle() {
 
 //Defining a function to keep showing the cards if they match
   function match() {
+     incrementMoves();
     for(let i = 0; i < openCards.length; i++) {
       openCards[i].classList.add("match");
     }
     openCards = [];
   }
+
+
 
 //Defining a function to check if two cards are equal
   function checkMatching(card) {
@@ -83,6 +109,7 @@ function shuffle() {
 
   if(openCards.length == 2) {
     if(openCards[0].firstElementChild.className !== openCards[1].firstElementChild.className) {
+       incrementMoves();
       for(let i = 0; i < openCards.length; i++) {
         openCards[i].classList.add("dontMatch");
       }
