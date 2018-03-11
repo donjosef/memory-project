@@ -1,8 +1,47 @@
 const cards = document.querySelectorAll(".card");
 const icons = document.querySelectorAll(".deck .fa");
+const theTimer = document.querySelector(".timer");
+const grid = document.querySelector(".deck");
 let openCards = [];
+let timer = [0, 0, 0];
+let timerRunning = false;
 
 
+/*
+------------------
+TIMER SECTION
+------------------*/
+
+//Add leading 0
+function formatTime(number) {
+    if(number < 10) {
+        number = "0" + number;
+    }
+    return number;
+}
+
+//Set and display the current timer
+function runTimer() {
+    let currentTime = formatTime(timer[0]) + ":" + formatTime(timer[1]);
+    theTimer.textContent = currentTime;
+    timer[2]++;
+    timer[0] = Math.floor( (timer[2]/10)/60); //minutes
+    timer[1] = Math.floor( (timer[2]/10) - (timer[0] * 60) ); //seconds
+}
+
+
+function start(e) {
+    if(e.target.tagName = "LI" && !timerRunning) {
+        //run the timer every 100ms only if the timer is not running
+        setInterval(runTimer, 100);
+        timerRunning = true;
+     }
+}
+
+/*
+-------------------------------
+MAIN FUNCTIONALITY OF THE GAME
+-----------------------------*/
 function shuffle() {
   let random = Math.floor(Math.random() * cards.length);
   for(let i = 0; i < cards.length; i++) {
@@ -60,6 +99,12 @@ function shuffle() {
        }
   }
 }
+
+
+/*
+----------------------
+EVENT LISTENER SECTION
+----------------------*/
   cards.forEach(function(card) {
     card.addEventListener("click", function() {
       //Invoke showIcons when users click on each Cards
@@ -67,6 +112,9 @@ function shuffle() {
       checkMatching(this);
     });
   });
+
+//When user click on a card, start the timer
+grid.addEventListener("click", start);
 
 
 
