@@ -50,10 +50,14 @@ function shuffle() {
       //call hideIcons if they dont match
       setTimeout(hideIcons, 900);
     } else {
-      //call match if they do match
-      match();
-
-    }
+      //If the cards have the same class BUT different id, call match()
+       if(openCards[0].id !== openCards[1].id) {
+           match();
+       //else, if they have the same id, meaning they are the same card, shift one element. In this way, if user click on the same card, the match class is not added
+       } else {
+           openCards.shift();
+         }
+       }
   }
 }
   cards.forEach(function(card) {
