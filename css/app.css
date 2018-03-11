@@ -139,7 +139,10 @@ h1 {
     list-style: none;
     display: inline-block;
 }
-
+.stars li i {
+  color: #fd0;
+  font-size: 1.7em;
+}
 .timer {
   display: inline-block;
   margin-left: 50px;
