@@ -28,6 +28,9 @@ body {
     flex-direction: column;
 }
 
+.hidden {
+  display: none;
+}
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
@@ -148,7 +151,42 @@ h1 {
   margin-left: 50px;
 }
 
-.score-panel .restart {
-    float: right;
+
+/*
+------------------
+END GAME SECTION
+-----------------*/
+
+.congrats {
+    color: #777;
+    text-transform: uppercase;
+    margin-top: 260px;
+    text-align: center;
+    animation: pulse 0.8s;
+    transform: scale(1);
+}
+
+.statistics  {
+    text-align: center;
+    color: #777;
+    font-size: 20px;
+    animation: pulse 0.8s;
+}
+
+.restart {
+    padding: 20px;
+    border: none;
+    border-radius: 6px;
+    margin: 0 auto;
+    display: block;
+    font-size: 20px;
+    background-color: #42ce77;
+    color: white;
     cursor: pointer;
+    animation: pulse 0.8s;
+    transform: scale(1);
+}
+
+.restart:hover {
+    background-color: rgba(40, 220, 77, 0.8);
 }

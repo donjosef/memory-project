@@ -1,3 +1,4 @@
+const mainContent = document.querySelector(".container");
 const cards = document.querySelectorAll(".card");
 const icons = document.querySelectorAll(".deck .fa");
 const stars = document.querySelectorAll(".stars li i");
@@ -6,8 +7,12 @@ const theTimer = document.querySelector(".timer");
 const grid = document.querySelector(".deck");
 let counter = 0;
 let openCards = [];
+let listOfMatches = [];
 let timer = [0, 0, 0];
 let timerRunning = false;
+let interval;
+let congrats;
+let statsMessage;
 
 
 /*
@@ -97,6 +102,10 @@ function shuffle() {
      incrementMoves();
     for(let i = 0; i < openCards.length; i++) {
       openCards[i].classList.add("match");
+      listOfMatches.push(openCards[i]);
+    }
+    if(listOfMatches.length == 4) {
+      endingGame();
     }
     openCards = [];
   }
@@ -129,6 +138,28 @@ function shuffle() {
 
 
 /*
+--------------------
+END OF GAME SECTION
+---------------------*/
+function endingGame() {
+    mainContent.classList.add("hidden");
+
+    clearInterval(interval);
+    congrats = document.createElement("h1");
+    congrats.textContent = "Congratulations you won!";
+    congrats.classList.add("congrats");
+    document.body.appendChild(congrats);
+    statsMessage = document.createElement("p");
+    statsMessage.textContent = `With ${moves.textContent} in ${ timer[0]} minutes and ${timer[1]} seconds`;
+    statsMessage.classList.add("statistics");
+    document.body.appendChild(statsMessage);
+    const button = document.createElement("button");
+    button.textContent = "Play Again";
+    button.classList.add("restart");
+    document.body.appendChild(button);
+}
+
+/*
 ----------------------
 EVENT LISTENER SECTION
 ----------------------*/
@@ -142,16 +173,3 @@ EVENT LISTENER SECTION
 
 //When user click on a card, start the timer
 grid.addEventListener("click", start);
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
