@@ -190,3 +190,40 @@ END GAME SECTION
 .restart:hover {
     background-color: rgba(40, 220, 77, 0.8);
 }
+
+
+
+@media screen and (max-width: 740px) {
+    .deck {
+        width: 100%;
+        box-shadow: none;
+        padding: 50px;
+    }
+
+}
+
+@media screen and (max-width: 660px) {
+    .deck .card {
+        width: 23%;
+        height: 115px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .score-panel {
+        width: 100%;
+        text-align: center;
+    }
+    .deck .card {
+        height: 100px;
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+    .deck .card {
+        width: 43%;
+        height: 100px;
+        margin-bottom: 7px;
+    }
+}
