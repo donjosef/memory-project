@@ -41,8 +41,8 @@ function runTimer() {
 function start(e) {
     if(e.target.tagName = "LI" && !timerRunning) {
         //run the timer every 100ms only if the timer is not running
-        setInterval(runTimer, 100);
-        timerRunning = true;
+        interval = setInterval(runTimer, 100);
+        timerRunning = true; //IMPORTANT otherwise the runTimer will start at every click
      }
 }
 
@@ -51,6 +51,7 @@ function start(e) {
 -----------------
 MOVES SECTION
 ----------------*/
+//This function is invoked everytime openCards.length = 2 meaning that a player has clicked two cards
 function incrementMoves() {
       counter++;
       if(counter == 1) {
@@ -104,7 +105,8 @@ function shuffle() {
       openCards[i].classList.add("match");
       listOfMatches.push(openCards[i]);
     }
-    if(listOfMatches.length == 4) {
+    //when listOfMatches is full of matched cards, invoke endingGame()
+    if(listOfMatches.length == 16) {
       endingGame();
     }
     openCards = [];
@@ -144,7 +146,7 @@ END OF GAME SECTION
 function endingGame() {
     mainContent.classList.add("hidden");
 
-    clearInterval(interval);
+    clearInterval(interval); //clear interval from running
     congrats = document.createElement("h1");
     congrats.textContent = "Congratulations you won!";
     congrats.classList.add("congrats");
@@ -157,6 +159,24 @@ function endingGame() {
     button.textContent = "Play Again";
     button.classList.add("restart");
     document.body.appendChild(button);
+
+     button.addEventListener("click", restart);
+}
+
+function restart() {
+    mainContent.classList.remove("hidden");
+    for(let i = 0; i < cards.length; i++) {
+        cards[i].classList.remove("match", "show");
+    }
+    this.remove();
+    congrats.remove();
+    statsMessage.remove();
+    counter = 0;
+    moves.textContent = "";
+    listOfMatches = []; //clear List of matches
+    theTimer.textContent = "00:00";
+    timer = [0, 0, 0]; //reset the values of minutes and seconds to 0, otherwise in the next play, the timer will not start from 0
+    timerRunning = false; //reset the timerRunning condition to false, otherwise the timer will not run anymore
 }
 
 /*
