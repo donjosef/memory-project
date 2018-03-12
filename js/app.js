@@ -174,6 +174,9 @@ function restart() {
     counter = 0;
     moves.textContent = "";
     listOfMatches = []; //clear List of matches
+    for(let i = 0; i < stars.length; i++) {
+      stars[i].style.color = "#fd0";
+    }
     theTimer.textContent = "00:00";
     timer = [0, 0, 0]; //reset the values of minutes and seconds to 0, otherwise in the next play, the timer will not start from 0
     timerRunning = false; //reset the timerRunning condition to false, otherwise the timer will not run anymore
