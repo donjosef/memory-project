@@ -151,6 +151,14 @@ h1 {
   margin-left: 50px;
 }
 
+.refresh {
+  float: right;
+  color: green;
+  min-width: 40px;
+  font-size: 33px;
+  margin-top: -10px;
+}
+
 
 /*
 ------------------
