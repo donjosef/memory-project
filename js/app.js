@@ -4,6 +4,7 @@ const icons = document.querySelectorAll(".deck .fa");
 const stars = document.querySelectorAll(".stars li i");
 const moves = document.querySelector(".moves");
 const theTimer = document.querySelector(".timer");
+const refresh = document.querySelector(".refresh");
 const grid = document.querySelector(".deck");
 let counter = 0;
 let openCards = [];
@@ -13,8 +14,6 @@ let timerRunning = false;
 let interval;
 let congrats;
 let statsMessage;
-
-
 /*
 ------------------
 TIMER SECTION
@@ -138,7 +137,6 @@ function shuffle() {
   }
 }
 
-
 /*
 --------------------
 END OF GAME SECTION
@@ -152,7 +150,8 @@ function endingGame() {
     congrats.classList.add("congrats");
     document.body.appendChild(congrats);
     statsMessage = document.createElement("p");
-    statsMessage.textContent = `With ${moves.textContent} in ${ timer[0]} minutes and ${timer[1]} seconds`;
+
+    statsMessage.textContent = `Your score is ${counter < 16 ? "3 Stars!" : counter >= 16 && counter <= 24 ? "2 Stars" : "1 Star ..."} With ${moves.textContent} in ${ timer[0]} minutes and ${timer[1]} seconds`;
     statsMessage.classList.add("statistics");
     document.body.appendChild(statsMessage);
     const button = document.createElement("button");
@@ -182,6 +181,22 @@ function restart() {
     timerRunning = false; //reset the timerRunning condition to false, otherwise the timer will not run anymore
 }
 
+function refreshGame() {
+  for(let i = 0; i < cards.length; i++) {
+      cards[i].classList.remove("match", "show");
+  }
+  for(let i = 0; i < stars.length; i++) {
+    stars[i].style.color = "#fd0";
+  }
+  counter = 0;
+  moves.textContent = "";
+  listOfMatches = [];
+  clearInterval(interval);
+  theTimer.textContent = "00:00";
+  timer = [0, 0, 0];
+  timerRunning = false;
+}
+
 /*
 ----------------------
 EVENT LISTENER SECTION
@@ -196,3 +211,4 @@ EVENT LISTENER SECTION
 
 //When user click on a card, start the timer
 grid.addEventListener("click", start);
+refresh.addEventListener("click", refreshGame);
