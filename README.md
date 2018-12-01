@@ -1,4 +1,4 @@
-# Memory Game Project
+# [Memory Game Project](https://donjosef.github.io/memory-project/)
 
 This is a browser-based memory game
 
